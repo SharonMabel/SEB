@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sozialisationstheorien</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f0f8ff;
+            --text-color: #333;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .question p {
+            margin-bottom: 10px;
+        }
+
+        select, .dropzone-inline {
+            border: 2px solid var(--secondary-color);
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .dropzone-inline {
+            display: inline-block;
+            min-width: 100px;
+            text-align: center;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .drag-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .word {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: grab;
+            transition: transform 0.2s;
+        }
+
+        .word:hover {
+            transform: scale(1.05);
+        }
+
+        .word.dragging {
+            opacity: 0.5;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .correct { color: var(--success-color); }
+        .incorrect { color: var(--error-color); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sozialisationstheorien</h1>
+        </header>
+    
+        <section id="socialization-theories">
+            <h2>Sozialisationstheorien - Zuordnungsaufgabe</h2>
+            
+            <div class="question">
+                <p>Ordne die folgenden Theorien den passenden Beispielen zu:</p>
+                <ul>
+                    <li>
+                        **Beispiel:** Ein Kind entwickelt durch frühe Bindungen ein Über-Ich.
+                        <select id="q1">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+                    <li>
+                        **Beispiel:** Ein Schüler verändert sein Verhalten, nachdem es durch Lob verstärkt wurde.
+                        <select id="q2">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+                    <li>
+                        **Beispiel:** Ein Kind lernt durch Experimentieren mit seiner Umwelt.
+                        <select id="q3">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+                    <li>
+                        **Beispiel:** Anpassung an gesellschaftliche Normen durch institutionelle Strukturen.
+                        <select id="q4">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        
+            <button type="button" onclick="checkTheoriesTest()">Prüfen</button>
+            <div id="theories-result"></div>
+        </section>
+<script>
+function checkTheoriesTest() {
+    const answers = {
+        q1: "Psychoanalytisch",
+        q2: "Lerntheorie",
+        q3: "Konstruktivistisch",
+        q4: "Systemtheorie"
+    };
+
+    let correct = 0;
+    const totalQuestions = Object.keys(answers).length;
+
+    Object.keys(answers).forEach((question) => {
+        const selected = document.getElementById(question).value;
+        if (selected === answers[question]) {
+            correct++;
+        }
+    });
+
+    const result = document.getElementById("theories-result");
+    result.textContent = `Du hast ${correct} von ${totalQuestions} richtig beantwortet.`;
+    result.style.color = correct === totalQuestions ? "green" : "red";
+}
+</script>
+</body>
+</html>

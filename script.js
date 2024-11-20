@@ -8,7 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "spiel.html";
         });
     });
-
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            const link = card.getAttribute('data-link');
+            if (link) {
+                window.location.href = link;
+            }
+        });
+    });
+    
     // For the exercise page
     if (window.location.pathname.includes("spiel.html")) {
         const term = sessionStorage.getItem("term");

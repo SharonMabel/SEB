@@ -1,200 +1,297 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interaktive Übung</title>
+    <title>Bildung, Erziehung und Sozialisation</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f0f8ff;
+            --text-color: #333;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
         .question {
             margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
         }
+
+        .question p {
+            margin-bottom: 10px;
+        }
+
+        select, .dropzone-inline {
+            border: 2px solid var(--secondary-color);
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .dropzone-inline {
+            display: inline-block;
+            min-width: 100px;
+            text-align: center;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
         .result {
             margin-top: 10px;
             font-weight: bold;
         }
+
         .drag-container {
-            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
+
         .word {
-            display: inline-block;
-            padding: 8px;
-            margin: 5px;
-            background-color: #ddd;
-            border: 1px solid #aaa;
-            border-radius: 5px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
             cursor: grab;
+            transition: transform 0.2s;
         }
-        .dropzone {
-            display: inline-block;
-            padding: 8px;
-            margin: 5px;
-            background-color: #f9f9f9;
-            border: 1px dashed #aaa;
+
+        .word:hover {
+            transform: scale(1.05);
+        }
+
+        .word.dragging {
+            opacity: 0.5;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
             border-radius: 5px;
-            min-width: 100px;
-            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .correct { color: var(--success-color); }
+        .incorrect { color: var(--error-color); }
     </style>
 </head>
 <body>
-    <h1>Interaktive Übung: Sozialisation, Erziehung, Bildung</h1>
-    
-    <!-- Multiple Choice Section -->
-    <section id="multiple-choice">
-        <h2>Multiple-Choice-Fragen</h2>
+    <div class="container">
+        <header>
+            <h1>Definitionen</h1>
+        </header>
+
+        <section id="multiple-choice">
+            <h2>Multiple-Choice-Fragen</h2>
+            
+            <div class="question">
+                <p>1. Welcher Begriff beschreibt die lebenslange Entwicklung zu einer sozial handlungsfähigen Persönlichkeit?</p>
+                <select id="mcq1">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(1, 'Sozialisation')">Prüfen</button>
+                <div class="result" id="mcq1-result"></div>
+            </div>
+            <div class="question">
+                <p>2. Was umfasst gezielte und bewusste Einflüsse auf die Persönlichkeitsentwicklung?</p>
+                <select id="mcq2">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(2, 'Erziehung')">Prüfen</button>
+                <div class="result" id="mcq2-result"></div>
+            </div>
+            <div class="question">
+                <p>3. Welcher Begriff beschreibt die Förderung von Kompetenzen und kulturellen Werten?</p>
+                <select id="mcq3">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(3, 'Bildung')">Prüfen</button>
+                <div class="result" id="mcq3-result"></div>
+            </div>
+            <div class="question">
+                <p>4. Was ist ein situatives, soziales Handeln mit dem Ziel, Lernprozesse zu unterstützen?</p>
+                <select id="mcq4">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(4, 'Pädagogisches Handeln')">Prüfen</button>
+                <div class="result" id="mcq4-result"></div>
+            </div>
+            <div class="question">
+                <p>5. Welcher Begriff umfasst die lebenslange Entwicklung in Wechselwirkung mit der Umwelt?</p>
+                <select id="mcq5">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(5, 'Sozialisation')">Prüfen</button>
+                <div class="result" id="mcq5-result"></div>
+            </div>
+            <div class="question">
+                <p>6. Welche Theorie beschäftigt sich mit der Vermittlung kultureller Werte?</p>
+                <select id="mcq6">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(6, 'Bildung')">Prüfen</button>
+                <div class="result" id="mcq6-result"></div>
+            </div>
+            <div class="question">
+                <p>7. Welche Instanz ist für die Primärsozialisation verantwortlich?</p>
+                <select id="mcq7">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Schule">Schule</option>
+                    <option value="Familie">Familie</option>
+                    <option value="Medien">Medien</option>
+                    <option value="Gleichaltrige">Gleichaltrige</option>
+                </select>
+                <button onclick="checkMCQ(7, 'Familie')">Prüfen</button>
+                <div class="result" id="mcq7-result"></div>
+            </div>
+            <div class="question">
+                <p>8. Welcher Begriff umfasst sowohl intentionale als auch beiläufige Einflüsse?</p>
+                <select id="mcq8">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(8, 'Sozialisation')">Prüfen</button>
+                <div class="result" id="mcq8-result"></div>
+            </div>
+            <div class="question">
+                <p>9. Welche Phase der Sozialisation ist hauptsächlich durch das schulische Umfeld geprägt?</p>
+                <select id="mcq9">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Primärsozialisation">Primärsozialisation</option>
+                    <option value="Sekundärsozialisation">Sekundärsozialisation</option>
+                    <option value="Tertiärsozialisation">Tertiärsozialisation</option>
+                    <option value="Postsekundärsozialisation">Postsekundärsozialisation</option>
+                </select>
+                <button onclick="checkMCQ(9, 'Sekundärsozialisation')">Prüfen</button>
+                <div class="result" id="mcq9-result"></div>
+            </div>
+            <div class="question">
+                <p>10. Welcher Begriff bezeichnet bewusst geplante Maßnahmen zur Persönlichkeitsentwicklung?</p>
+                <select id="mcq10">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="Sozialisation">Sozialisation</option>
+                    <option value="Erziehung">Erziehung</option>
+                    <option value="Bildung">Bildung</option>
+                    <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
+                </select>
+                <button onclick="checkMCQ(10, 'Erziehung')">Prüfen</button>
+                <div class="result" id="mcq10-result"></div>
+            </div>
+        </section>
+
+        <section class="section" id="drag-and-drop">
+            <h2>Lückentext-Aufgabe</h2>
+            <div class="question">
+                <p>1. Die <span class="dropzone-inline" id="drop1"></span> ist ein lebenslanger Prozess, in dem Menschen durch Interaktionen mit ihrer Umwelt Werte, Normen und Kompetenzen erwerben.</p>
+                <p>2. Unter <span class="dropzone-inline" id="drop2"></span> versteht man bewusste, zielgerichtete Maßnahmen, die darauf abzielen, die Persönlichkeitsentwicklung zu fördern.</p>
+                <p>3. <span class="dropzone-inline" id="drop3"></span> beschreibt das soziale Handeln, das Lernprozesse ermöglicht und situationsgerecht angepasst wird.</p>
+                <p>4. Ein zentrales Ziel der <span class="dropzone-inline" id="drop4"></span> ist die Förderung von Selbstständigkeit und sozialer Verantwortung.</p>
+                <p>5. <span class="dropzone-inline" id="drop5"></span> umfasst sowohl persönliche Selbstentfaltung als auch den Erwerb gesellschaftlich relevanter Qualifikationen.</p>
+            </div>
         
-        <div class="question">
-            <p>1. Welcher Begriff beschreibt die lebenslange Entwicklung zu einer sozial handlungsfähigen Persönlichkeit?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(1, 'Sozialisation')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>2. Was umfasst gezielte und bewusste Einflüsse auf die Persönlichkeitsentwicklung?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(2, 'Erziehung')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>3. Welcher Begriff beschreibt die Förderung von Kompetenzen und kulturellen Werten?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(3, 'Bildung')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>4. Was ist ein situatives, soziales Handeln mit dem Ziel, Lernprozesse zu unterstützen?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(4, 'Pädagogisches Handeln')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>5. Welcher Begriff umfasst die lebenslange Entwicklung in Wechselwirkung mit der Umwelt?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(1, 'Sozialisation')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>6. Welche Theorie beschäftigt sich mit der Vermittlung kultureller Werte?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(3, 'Bildung')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>7. Welche Instanz ist für die Primärsozialisation verantwortlich?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Schule">Schule</option>
-                <option value="Familie">Familie</option>
-                <option value="Medien">Medien</option>
-                <option value="Gleichaltrige">Gleichaltrige</option>
-            </select>
-            <button onclick="checkMCQ(2, 'Familie')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>8. Welcher Begriff umfasst sowohl intentionale als auch beiläufige Einflüsse?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(1, 'Sozialisation')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>9. Welche Phase der Sozialisation ist hauptsächlich durch das schulische Umfeld geprägt?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Primärsozialisation">Primärsozialisation</option>
-                <option value="Sekundärsozialisation">Sekundärsozialisation</option>
-                <option value="Tertiärsozialisation">Tertiärsozialisation</option>
-                <option value="Postsekundärsozialisation">Postsekundärsozialisation</option>
-            </select>
-            <button onclick="checkMCQ(2, 'Sekundärsozialisation')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-        <div class="question">
-            <p>10. Welcher Begriff bezeichnet bewusst geplante Maßnahmen zur Persönlichkeitsentwicklung?</p>
-            <select id="mcq1">
-                <option value="">-- Bitte wählen --</option>
-                <option value="Sozialisation">Sozialisation</option>
-                <option value="Erziehung">Erziehung</option>
-                <option value="Bildung">Bildung</option>
-                <option value="Pädagogisches Handeln">Pädagogisches Handeln</option>
-            </select>
-            <button onclick="checkMCQ(2, 'Erziehung')">Prüfen</button>
-            <div class="result" id="mcq1-result"></div>
-        </div>
-
-
-        <!-- Weitere Multiple-Choice-Fragen -->
-        <!-- Dupliziere die obige Frage und ändere die IDs, Antworten und richtigen Werte -->
-    </section>
-    
-    <!-- Drag-and-Drop Section -->
-    <section id="drag-and-drop">
-        <h2>Lückentext-Fragen</h2>
+            <div class="drag-container">
+                <div class="word" draggable="true" id="drag1">Sozialisation</div>
+                <div class="word" draggable="true" id="drag4">Bildung</div>
+                <div class="word" draggable="true" id="drag3">Pädagogisches Handeln</div>
+                <div class="word" draggable="true" id="drag2">Erziehung</div>
+                <div class="word" draggable="true" id="drag5">Autonomie</div>
+                <div class="word" draggable="true" id="drag6">Normen</div>
+            </div>
         
-        <div class="question">
-            <p>1. <span class="dropzone" id="drop1"></span> ist der Prozess, durch den Menschen Kompetenzen und kulturelle Werte erwerben.</p>
-        </div>
+            <button onclick="checkDragAndDrop()">Prüfen</button>
+            <div class="result" id="drag-drop-result"></div>
+        </section>
+        
 
-        <div class="question">
-            <p>2. <span class="dropzone" id="drop2"></span> beschreibt gezielte und bewusste Einflüsse auf die Persönlichkeitsentwicklung.</p>
-        </div>
-
-        <div class="drag-container">
-            <div class="word" draggable="true" id="drag1">Bildung</div>
-            <div class="word" draggable="true" id="drag2">Erziehung</div>
-            <div class="word" draggable="true" id="drag3">Sozialisation</div>
-            <div class="word" draggable="true" id="drag4">Pädagogisches Handeln</div>
-        </div>
-        <button onclick="checkDragAndDrop()">Prüfen</button>
-        <div class="result" id="drag-drop-result"></div>
-    </section>
-    
     <script>
         // Multiple Choice Checker
         function checkMCQ(questionNum, correctAnswer) {
@@ -202,20 +299,21 @@
             const result = document.getElementById(`mcq${questionNum}-result`);
             if (select.value === correctAnswer) {
                 result.textContent = "Richtig!";
-                result.style.color = "green";
+                result.className = "result correct";
             } else {
                 result.textContent = "Falsch. Versuch es nochmal.";
-                result.style.color = "red";
+                result.className = "result incorrect";
             }
         }
 
         // Drag-and-Drop Functionality
         const draggables = document.querySelectorAll(".word");
-        const dropzones = document.querySelectorAll(".dropzone");
+        const dropzones = document.querySelectorAll(".dropzone-inline");
 
         draggables.forEach(draggable => {
-            draggable.addEventListener("dragstart", () => {
+            draggable.addEventListener("dragstart", (e) => {
                 draggable.classList.add("dragging");
+                e.dataTransfer.setData('text/plain', draggable.id);
             });
 
             draggable.addEventListener("dragend", () => {
@@ -226,18 +324,28 @@
         dropzones.forEach(dropzone => {
             dropzone.addEventListener("dragover", e => {
                 e.preventDefault();
-                const draggable = document.querySelector(".dragging");
-                dropzone.appendChild(draggable);
+            });
+
+            dropzone.addEventListener("drop", e => {
+                e.preventDefault();
+                const draggedId = e.dataTransfer.getData('text/plain');
+                const draggedElement = document.getElementById(draggedId);
+                dropzone.textContent = draggedElement.textContent;
             });
         });
 
         // Drag-and-Drop Checker
         function checkDragAndDrop() {
             const answers = {
-                drop1: "Bildung",
+                drop1: "Sozialisation",
                 drop2: "Erziehung",
-            };
+                drop3: "Pädagogisches Handeln",
+                drop4: "Autonomie",
+                drop5: "Bildung"
+    };
+
             let correct = 0;
+            const result = document.getElementById("drag-drop-result");
 
             Object.keys(answers).forEach(dropId => {
                 const dropzone = document.getElementById(dropId);
@@ -247,13 +355,12 @@
                 }
             });
 
-            const result = document.getElementById("drag-drop-result");
             if (correct === Object.keys(answers).length) {
                 result.textContent = "Alle Antworten sind richtig!";
-                result.style.color = "green";
+                result.className = "result correct";
             } else {
-                result.textContent = "Einige Antworten sind falsch. Versuch es nochmal.";
-                result.style.color = "red";
+                result.textContent = `Du hast ${correct} von ${Object.keys(answers).length} Antworten richtig. Versuch es nochmal!`;
+                result.className = "result incorrect";
             }
         }
     </script>

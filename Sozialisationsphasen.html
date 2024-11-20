@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sozialisationsphasen</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f0f8ff;
+            --text-color: #333;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .question p {
+            margin-bottom: 10px;
+        }
+
+        select, .dropzone-inline {
+            border: 2px solid var(--secondary-color);
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .dropzone-inline {
+            display: inline-block;
+            min-width: 100px;
+            text-align: center;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .drag-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .word {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: grab;
+            transition: transform 0.2s;
+        }
+
+        .word:hover {
+            transform: scale(1.05);
+        }
+
+        .word.dragging {
+            opacity: 0.5;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .correct { color: var(--success-color); }
+        .incorrect { color: var(--error-color); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sozialisationsphasen</h1>
+        </header>
+<section id="socialization-phases">
+    <h2>Phasen der Sozialisation - Multiple-Choice-Test</h2>
+    
+    <form id="phases-test">
+        <!-- Frage 1 -->
+        <div class="question">
+            <p>1. Welche Instanz vermittelt unbewusst Werte und Normen in der Primärsozialisation?</p>
+            <input type="radio" name="q1" value="A"> A) Geschwister<br>
+            <input type="radio" name="q1" value="B"> B) Schule<br>
+            <input type="radio" name="q1" value="C"> C) Familie<br>
+            <input type="radio" name="q1" value="D"> D) Medien<br>
+        </div>
+
+        <!-- Frage 2 -->
+        <div class="question">
+            <p>2. Wie unterscheidet sich die Sekundärsozialisation von der Primärsozialisation?</p>
+            <input type="radio" name="q2" value="A"> A) Sie ist intensiver und emotionaler.<br>
+            <input type="radio" name="q2" value="B"> B) Sie erfolgt durch soziale Gruppen und Institutionen.<br>
+            <input type="radio" name="q2" value="C"> C) Sie endet im Jugendalter.<br>
+            <input type="radio" name="q2" value="D"> D) Sie beeinflusst nur berufliche Rollen.<br>
+        </div>
+
+        <!-- Frage 3 -->
+        <div class="question">
+            <p>3. Ein Mensch erwirbt neue Fähigkeiten, um sich an eine berufliche Rolle anzupassen. Welche Phase beschreibt dies?</p>
+            <input type="radio" name="q3" value="A"> A) Primärsozialisation<br>
+            <input type="radio" name="q3" value="B"> B) Sekundärsozialisation<br>
+            <input type="radio" name="q3" value="C"> C) Tertiärsozialisation<br>
+            <input type="radio" name="q3" value="D"> D) Anpassungssozialisation<br>
+        </div>
+
+        <!-- Frage 4 -->
+        <div class="question">
+            <p>4. Welcher Begriff passt zu allen drei Phasen?</p>
+            <input type="radio" name="q4" value="A"> A) Sozialisationsinstanzen<br>
+            <input type="radio" name="q4" value="B"> B) Wertevermittlung<br>
+            <input type="radio" name="q4" value="C"> C) Rollenübernahme<br>
+            <input type="radio" name="q4" value="D"> D) Kommunikation<br>
+        </div>
+
+        <button type="button" onclick="checkPhasesTest()">Prüfen</button>
+        <div id="phases-result"></div>
+    </form>
+</section>
+<script>
+function checkPhasesTest() {
+    const answers = {
+        q1: "C",
+        q2: "B",
+        q3: "C",
+        q4: "A"
+    };
+
+    let correct = 0;
+    const totalQuestions = Object.keys(answers).length;
+
+    Object.keys(answers).forEach((question) => {
+        const selected = document.querySelector(`input[name="${question}"]:checked`);
+        if (selected && selected.value === answers[question]) {
+            correct++;
+        }
+    });
+
+    const result = document.getElementById("phases-result");
+    result.textContent = `Du hast ${correct} von ${totalQuestions} richtig beantwortet.`;
+    result.style.color = correct === totalQuestions ? "green" : "red";
+}
+</script>
+</body>
+</html>
