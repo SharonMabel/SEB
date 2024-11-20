@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sozialisationsphasen</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f0f8ff;
+            --text-color: #333;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .question p {
+            margin-bottom: 10px;
+        }
+
+        select, .dropzone-inline {
+            border: 2px solid var(--secondary-color);
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .dropzone-inline {
+            display: inline-block;
+            min-width: 100px;
+            text-align: center;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .drag-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .word {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: grab;
+            transition: transform 0.2s;
+        }
+
+        .word:hover {
+            transform: scale(1.05);
+        }
+
+        .word.dragging {
+            opacity: 0.5;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .correct { color: var(--success-color); }
+        .incorrect { color: var(--error-color); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sozialisationsphasen</h1>
+        </header>
+<section id="">
+</section>
+<script>
+</script>
+</body>
+</html>

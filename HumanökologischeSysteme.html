@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humanökologische Systeme</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f0f8ff;
+            --text-color: #333;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .question p {
+            margin-bottom: 10px;
+        }
+
+        select, .dropzone-inline {
+            border: 2px solid var(--secondary-color);
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .dropzone {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 150px; /* Definierte Breite */
+            height: 30px; /* Definierte Höhe */
+            border: 2px dashed var(--secondary-color); /* Sichtbarer Rahmen */
+            background-color: #f9f9f9; /* Heller Hintergrund */
+            border-radius: 5px; /* Abgerundete Ecken */
+            text-align: center; /* Zentriert den Text */
+            line-height: 30px; /* Vertikale Zentrierung */
+            margin: 5px;
+            font-weight: bold;
+            color: var(--text-color);
+            vertical-align: middle;
+    }
+
+        .dropzone-inline {
+            display: inline-block;
+            min-width: 100px;
+            text-align: center;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .dropzone.hovered {
+            background-color: #dff0d8; /* Helles Grün als Hinweis */
+            border-color: var(--success-color);
+        }
+
+        .dropzone .word{
+            width: 100%;
+            height: 100%;
+            font-size: 0.9em; /* Kleinere Schriftgröße */
+            padding: 0;
+            border-radius: 4px; /* Abgerundete Ecken angleichen */
+            background-color: #e0eaff; /* Dezenteres Blau für Wörter */
+            color: #2c3e50; /* Textfarbe anpassen */
+            box-shadow: none; /* Schatten entfernen */
+        }
+        
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .drag-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .word {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: grab;
+            transition: transform 0.2s;
+        }
+
+        .word:hover {
+            transform: scale(1.05);
+        }
+
+        .word.dragging {
+            opacity: 0.5;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .correct { color: var(--success-color); }
+        .incorrect { color: var(--error-color); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Humanökologische Systeme</h1>
+        </header>
+        <section id="human-ecological-systems">
+            <h2>Systeme des Humanökologischen Ansatzes - Lückentext</h2>
+            <p>Ziehe die Begriffe in die richtigen Lücken:</p>
+            <p>
+                Die Systeme des humanökologischen Ansatzes beschreiben die verschiedenen Eben, auf denen die Umwelt das Individuum beeinflusst. 
+                Das <span class="dropzone" id="drop1"></span> ist die direkte Umgebung des Individuums, wie zum Beispiel die <span class="dropzone" id="drop2"></span> oder die Schule.
+                Wechselwirkungen zwischen diesen Mikrosystemen werden im <span class="dropzone" id="drop3"></span> abgebildet, wie beispielsweise die <span class="dropzone" id="drop4"></span> zwischen Eltern und <span class="dropzone" id="drop5"></span>.
+                Das <span class="dropzone" id="drop6"></span> umfasst <span class="dropzone" id="drop7"></span> Einflüsse, die das Individuum zwar nicht direkt erlebt, die jedoch Auswirkungen haben, wie die Arbeitszeiten der <span class="dropzone" id="drop8"></span>.
+                Übergeordnet sind die <span class="dropzone" id="drop9"></span> und Normen einer Gesellschaft, die im <span class="dropzone" id="drop10"></span> zusammengefasst werden.
+                Dieses System umfasst auch kulturelle Traditionen, <span class="dropzone" id="drop11"></span> und soziale Normen.    
+                <span class="dropzone" id="drop12"></span> Veränderungen, wie die Digitalisierung oder ein Umzug, werden im <span class="dropzone" id="drop13"></span> beschrieben.
+            </p>
+            <div class="drag-container">
+                <div class="word" draggable="true" id="drag6">Exosystem</div>
+                <div class="word" draggable="true" id="drag8">Eltern</div>
+                <div class="word" draggable="true" id="drag2">Familie</div>
+                <div class="word" draggable="true" id="drag3">Mesosystem</div>
+                <div class="word" draggable="true" id="drag4">Zusammenarbeit</div>
+                <div class="word" draggable="true" id="drag5">Lehrkräften</div>
+                <div class="word" draggable="true" id="drag14">Individuum</div>
+                <div class="word" draggable="true" id="drag16">Umzug</div>
+                <div class="word" draggable="true" id="drag1">Mikrosystem</div>
+                <div class="word" draggable="true" id="drag7">indirekte</div>
+                <div class="word" draggable="true" id="drag8">Eltern</div>
+                <div class="word" draggable="true" id="drag9">Werte</div>
+                <div class="word" draggable="true" id="drag10">Makrosystem</div>
+                <div class="word" draggable="true" id="drag11">Rechte</div>
+                <div class="word" draggable="true" id="drag12">Zeitliche</div>
+                <div class="word" draggable="true" id="drag13">Chronosystem</div>
+                <div class="word" draggable="true" id="drag14">Individuum</div>
+                <div class="word" draggable="true" id="drag15">Schule</div>
+                <div class="word" draggable="true" id="drag16">Umzug</div>
+            </div>
+            <button type="button" onclick="checkSystems()">Prüfen</button>
+            <div id="systems-result"></div>
+        </section>        
+<script>
+// Event-Listener für Drag-and-Drop-Funktionalität
+const words = document.querySelectorAll('.word');
+const dropzones = document.querySelectorAll('.dropzone');
+
+// Drag-Events für die Wörter
+words.forEach(word => {
+    word.addEventListener('dragstart', dragStart);
+    word.addEventListener('dragend', dragEnd);
+});
+
+// Drag-Events für die Dropzones
+dropzones.forEach(dropzone => {
+    dropzone.addEventListener('dragover', dragOver);
+    dropzone.addEventListener('dragenter', dragEnter);
+    dropzone.addEventListener('dragleave', dragLeave);
+    dropzone.addEventListener('drop', drop);
+});
+
+function dragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    setTimeout(() => {
+        e.target.classList.add('dragging');
+    }, 0);
+}
+
+function dragEnd(e) {
+    e.target.classList.remove('dragging');
+}
+
+function dragOver(e) {
+    e.preventDefault(); // Ermöglicht das Ablegen
+}
+
+function dragEnter(e) {
+    e.preventDefault(); // Ermöglicht das Ablegen
+    e.target.classList.add('hovered');
+}
+
+function dragLeave(e) {
+    e.target.classList.remove('hovered');
+}
+
+function drop(e) {
+    e.preventDefault();
+    const wordId = e.dataTransfer.getData('text/plain');
+    const wordElement = document.getElementById(wordId);
+
+    if (!e.target.hasChildNodes()) { // Überprüft, ob die Dropzone leer ist
+        e.target.appendChild(wordElement);
+        e.target.setAttribute('data-word', wordElement.textContent); // Speichert das Wort in der Dropzone
+    }
+
+    e.target.classList.remove('hovered');
+}
+
+// Funktion zur Überprüfung der Antworten
+function checkSystems() {
+    const answers = {
+        drop1: "Mikrosystem",
+        drop2: "Familie",
+        drop3: "Mesosystem",
+        drop4: "Zusammenarbeit",
+        drop5: "Lehrkräften",
+        drop6: "Exosystem",
+        drop7: "indirekte",
+        drop8: "Eltern",
+        drop9: "Werte",
+        drop10: "Makrosystem",
+        drop11: "Rechte",
+        drop12: "Zeitliche",
+        drop13: "Chronosystem",
+    };
+
+    let correct = 0;
+    const totalQuestions = Object.keys(answers).length;
+
+    Object.keys(answers).forEach((dropzoneId) => {
+        const dropzone = document.getElementById(dropzoneId);
+        const word = dropzone.getAttribute("data-word");
+        if (word === answers[dropzoneId]) {
+            correct++;
+        }
+    });
+
+    const result = document.getElementById("systems-result");
+    result.textContent = `Du hast ${correct} von ${totalQuestions} richtig beantwortet.`;
+    result.style.color = correct === totalQuestions ? "green" : "red";
+}
+
+</script>
+</body>
+</html>
