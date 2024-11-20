@@ -150,7 +150,7 @@
                 <p>Ordne die folgenden Theorien den passenden Beispielen zu:</p>
                 <ul>
                     <li>
-                        **Beispiel:** Ein Kind entwickelt durch frühe Bindungen ein Über-Ich.
+                        Ein Kind entwickelt durch frühe Bindungen ein Über-Ich.
                         <select id="q1">
                             <option value="">-- Wähle eine Theorie --</option>
                             <option value="Psychoanalytisch">Psychoanalytisch</option>
@@ -160,7 +160,7 @@
                         </select>
                     </li>
                     <li>
-                        **Beispiel:** Ein Schüler verändert sein Verhalten, nachdem es durch Lob verstärkt wurde.
+                         Ein Schüler verändert sein Verhalten, nachdem es durch Lob verstärkt wurde.
                         <select id="q2">
                             <option value="">-- Wähle eine Theorie --</option>
                             <option value="Psychoanalytisch">Psychoanalytisch</option>
@@ -170,7 +170,7 @@
                         </select>
                     </li>
                     <li>
-                        **Beispiel:** Ein Kind lernt durch Experimentieren mit seiner Umwelt.
+                        Ein Kind lernt durch Experimentieren mit seiner Umwelt.
                         <select id="q3">
                             <option value="">-- Wähle eine Theorie --</option>
                             <option value="Psychoanalytisch">Psychoanalytisch</option>
@@ -180,7 +180,7 @@
                         </select>
                     </li>
                     <li>
-                        **Beispiel:** Anpassung an gesellschaftliche Normen durch institutionelle Strukturen.
+                        Anpassung an gesellschaftliche Normen durch institutionelle Strukturen.
                         <select id="q4">
                             <option value="">-- Wähle eine Theorie --</option>
                             <option value="Psychoanalytisch">Psychoanalytisch</option>
@@ -192,6 +192,52 @@
                 </ul>
             </div>
         
+            <div class="question">
+                <p>Ordne die folgenden Vertreter den passenden Theorien zu:</p>
+                <ul>
+                    <li>
+                        Vertreter: Niklas Luhmann
+                        <select id="q8">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+                    <li>
+                        Vertreter: B. F. Skinner
+                        <select id="q6">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+                    <li>
+                        Vertreter: Sigmund Freud
+                        <select id="q5">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+
+                    <li>
+                        Vertreter: Jean Piaget
+                        <select id="q7">
+                            <option value="">-- Wähle eine Theorie --</option>
+                            <option value="Psychoanalytisch">Psychoanalytisch</option>
+                            <option value="Konstruktivistisch">Konstruktivistisch</option>
+                            <option value="Lerntheorie">Lerntheorie</option>
+                            <option value="Systemtheorie">Systemtheorie</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
             <button type="button" onclick="checkTheoriesTest()">Prüfen</button>
             <div id="theories-result"></div>
         </section>
@@ -202,6 +248,32 @@ function checkTheoriesTest() {
         q2: "Lerntheorie",
         q3: "Konstruktivistisch",
         q4: "Systemtheorie"
+    };
+
+    let correct = 0;
+    const totalQuestions = Object.keys(answers).length;
+
+    Object.keys(answers).forEach((question) => {
+        const selected = document.getElementById(question).value;
+        if (selected === answers[question]) {
+            correct++;
+        }
+    });
+
+    const result = document.getElementById("theories-result");
+    result.textContent = `Du hast ${correct} von ${totalQuestions} richtig beantwortet.`;
+    result.style.color = correct === totalQuestions ? "green" : "red";
+}
+function checkTheoriesTest() {
+    const answers = {
+        q1: "Psychoanalytisch",
+        q2: "Lerntheorie",
+        q3: "Konstruktivistisch",
+        q4: "Systemtheorie",
+        q5: "Psychoanalytisch",
+        q6: "Lerntheorie",
+        q7: "Konstruktivistisch",
+        q8: "Systemtheorie"
     };
 
     let correct = 0;

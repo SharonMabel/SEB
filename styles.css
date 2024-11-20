@@ -7,14 +7,19 @@ body {
 }
 
 header {
+    max-width: 800px;
+    margin: 50px auto;
     text-align: center;
-    padding: 20px;
-    background: linear-gradient(to right, #2c3e50, #3498db);
+    padding: 50px;
+    background: linear-gradient(to right, #498fd6, #1a1f71);
     color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     font-size: 2.5em;
+    margin: 0;
 }
 
 p {
@@ -23,23 +28,32 @@ p {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
+    justify-items: center;
 }
 
 .card {
-    background-color: #3498db;
+    background: linear-gradient(to right, #498fd6, #1a1f71);
     color: white;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s;
+    font-weight: bold;
+    width: 200px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .card:hover {
     transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 #exercise-container {
@@ -65,4 +79,10 @@ p {
     align-items: center;
     text-align: center;
     border-radius: 5px;
+}
+/* Für kleinere Bildschirme */
+@media (max-width: 600px) {
+    .card {
+        font-size: 1em;
+    }
 }
