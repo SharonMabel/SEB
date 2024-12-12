@@ -89,11 +89,6 @@
             background-color: rgba(255, 255, 255, 0.5);
         }
 
-        .puzzle-piece.matched, .puzzle-slot.matched {
-            background-color: var(--success-color);
-            color: white;
-        }
-
         button {
             display: block;
             margin: 30px auto;
@@ -116,33 +111,6 @@
             font-size: 1.5rem;
             font-weight: bold;
             margin-top: 20px;
-        }
-
-        .domino-piece {
-            display: flex;
-            flex-direction: row;
-            border: 3px solid var(--secondary-color);
-            border-radius: 20px;
-            width: 600px;
-            margin: 10px auto;
-        }
-
-        .domino-piece > div {
-            width: 50%;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .domino-piece .concept {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .domino-piece .definition {
-            background-color: white;
         }
     </style>
 </head>
@@ -167,7 +135,6 @@
         </section>
         <button id="check-button">Prüfen</button>
         <div id="result-message"></div>
-        <div id="domino-result"></div>
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -175,12 +142,11 @@
             const slots = document.querySelectorAll(".puzzle-slot");
             const button = document.getElementById("check-button");
             const resultMessage = document.getElementById("result-message");
-            const dominoResult = document.getElementById("domino-result");
 
             let draggedPiece = null;
 
             pieces.forEach(piece => {
-                piece.addEventListener("dragstart", (e) => {
+                piece.addEventListener("dragstart", () => {
                     draggedPiece = piece;
                 });
 
@@ -194,46 +160,20 @@
                     e.preventDefault();
                 });
 
-                slot.addEventListener("drop", (e) => {
-                    e.preventDefault();
-                    // Erlaubt das Ablegen von Begriff oder Definition
-                    if (draggedPiece) {
-                        // Wenn der Slot leer oder der Slot-Match dem Piece-Match entspricht
-                        if (!slot.hasChildNodes() || 
-                            (slot.firstChild.dataset.match === draggedPiece.dataset.match)) {
-                            
-                            // Wenn das Piece bereits woanders angebracht war, entferne es dort
-                            const currentParent = draggedPiece.parentElement;
-                            if (currentParent !== slot) {
-                                if (currentParent.classList.contains('puzzle-slot')) {
-                                    currentParent.innerHTML = '';
-                                }
-                                slot.innerHTML = '';
-                                slot.appendChild(draggedPiece);
-                            }
-                        }
+                slot.addEventListener("drop", () => {
+                    if (!slot.hasChildNodes() && draggedPiece) {
+                        slot.appendChild(draggedPiece);
                     }
                 });
             });
 
             button.addEventListener("click", () => {
                 let correct = 0;
-                let dominoHTML = '';
 
                 slots.forEach(slot => {
                     const piece = slot.firstChild;
                     if (piece && piece.dataset.match === slot.dataset.match) {
                         correct++;
-                        piece.classList.add('matched');
-                        slot.classList.add('matched');
-                        
-                        // Erstelle Dominosteine für korrekte Zuordnungen
-                        dominoHTML += `
-                            <div class="domino-piece">
-                                <div class="concept">${piece.textContent}</div>
-                                <div class="definition">${slot.textContent}</div>
-                            </div>
-                        `;
                     }
                 });
 
@@ -244,9 +184,6 @@
                     resultMessage.textContent = `Du hast ${correct} von ${slots.length} korrekt! Versuch es nochmal.`;
                     resultMessage.style.color = "red";
                 }
-
-                // Zeige Dominosteine
-                dominoResult.innerHTML = dominoHTML;
             });
         });
     </script>
