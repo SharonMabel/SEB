@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Definition Puzzle</title>
+    <title>Praktische Anwendung des humanökologischen Ansatzes</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -14,241 +14,312 @@
             --error-color: #e74c3c;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         header {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
             text-align: center;
-            width: 100%;
-            padding: 30px;
+            padding: 30px 0;
+            margin-bottom: 30px;
         }
 
-        header h1 {
-            font-size: 2.5rem;
+        h1 {
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
 
-        header p {
-            font-size: 1.2rem;
-            margin-top: 5px;
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
         }
 
-        main {
-            width: 90%;
-            max-width: 1200px;
-            margin-top: 20px;
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        #puzzle-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
         }
 
-        .puzzle-piece, .puzzle-slot {
-            position: relative;
-            width: 300px;
-            height: 150px;
-            display: flex;
+        .question p {
+            margin-bottom: 10px;
+        }
+
+        select, .dropzone-inline {
+            border: 2px solid var(--secondary-color);
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .dropzone {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            font-size: 1rem;
+            overflow: hidden;
+            width: 150px; /* Definierte Breite */
+            height: 30px; /* Definierte Höhe */
+            border: 2px dashed var(--secondary-color); /* Sichtbarer Rahmen */
+            background-color: #f9f9f9; /* Heller Hintergrund */
+            border-radius: 5px; /* Abgerundete Ecken */
+            text-align: center; /* Zentriert den Text */
+            line-height: 30px; /* Vertikale Zentrierung */
+            margin: 5px;
             font-weight: bold;
-            border: 3px solid var(--secondary-color);
-            border-radius: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: var(--text-color);
+            vertical-align: middle;
+    }
+
+        .dropzone-inline {
+            display: inline-block;
+            min-width: 100px;
+            text-align: center;
+            background-color: #f0f0f0;
             cursor: pointer;
         }
 
-        .puzzle-piece {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="150"><rect width="100%" height="100%" fill="%23ffffff" rx="20" ry="20" stroke="%233498db" stroke-width="3"/></svg>');
-            cursor: grab;
+        .dropzone.hovered {
+            background-color: #dff0d8; /* Helles Grün als Hinweis */
+            border-color: var(--success-color);
         }
 
-        .puzzle-piece:active {
-            cursor: grabbing;
+        .dropzone .word{
+            width: 100%;
+            height: 100%;
+            font-size: 0.9em; /* Kleinere Schriftgröße */
+            padding: 0;
+            border-radius: 4px; /* Abgerundete Ecken angleichen */
+            background-color: #e0eaff; /* Dezenteres Blau für Wörter */
+            color: #2c3e50; /* Textfarbe anpassen */
+            box-shadow: none; /* Schatten entfernen */
+        }
+        
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
         }
 
-        .puzzle-slot {
-            border: 3px dashed var(--secondary-color);
-            background-color: rgba(255, 255, 255, 0.5);
+        .drag-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .puzzle-piece.matched, .puzzle-slot.matched {
-            background-color: var(--success-color);
+        .word {
+            background-color: var(--secondary-color);
             color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: grab;
+            transition: transform 0.2s;
+        }
+
+        .word:hover {
+            transform: scale(1.05);
+        }
+
+        .word.dragging {
+            opacity: 0.5;
         }
 
         button {
-            display: block;
-            margin: 30px auto;
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            background-color: var(--secondary-color);
             color: white;
-            background: var(--secondary-color);
             border: none;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background: var(--primary-color);
+            background-color: var(--primary-color);
         }
 
-        #result-message {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        .domino-piece {
-            display: flex;
-            flex-direction: row;
-            border: 3px solid var(--secondary-color);
-            border-radius: 20px;
-            width: 600px;
-            margin: 10px auto;
-        }
-
-        .domino-piece > div {
-            width: 50%;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .domino-piece .concept {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .domino-piece .definition {
-            background-color: white;
-        }
+        .correct { color: var(--success-color); }
+        .incorrect { color: var(--error-color); }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Definition Puzzle</h1>
-        <p>Ziehe die Begriffe zu den passenden Definitionen, um das Puzzle zu lösen!</p>
-    </header>
-    <main>
-        <section id="puzzle-container">
-            <!-- Begriffe -->
-            <div class="puzzle-piece draggable" draggable="true" data-match="1">Sozialisation</div>
-            <div class="puzzle-piece draggable" draggable="true" data-match="2">Erziehung</div>
-            <div class="puzzle-piece draggable" draggable="true" data-match="3">Bildung</div>
-            <div class="puzzle-piece draggable" draggable="true" data-match="4">Pädagogisches Handeln</div>
-
-            <!-- Definitionen -->
-            <div class="puzzle-slot" data-match="1">Der Prozess, in dem Menschen durch Interaktion mit ihrer Umwelt Werte, Normen und Kompetenzen erwerben.</div>
-            <div class="puzzle-slot" data-match="2">Gezielte, bewusste Einflüsse, die auf die Persönlichkeitsentwicklung abzielen.</div>
-            <div class="puzzle-slot" data-match="3">Der Prozess, durch den Menschen Kompetenzen, Wissen und kulturelle Werte erwerben.</div>
-            <div class="puzzle-slot" data-match="4">Soziales Handeln, das Lernen ermöglicht und situationsgerecht angepasst wird.</div>
+    <div class="container">
+        <header>
+            <h1>Praktische Anwendung des humanökologischen Ansatzes</h1>
+        </header>
+        <section id="interactive-table">
+            <h2>Praktische Anwendung des humanökologischen Ansatzes</h2>
+            <p>Ziehe die Begriffe in die passenden Tabellenfelder:</p>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>System</th>
+                        <th>Beispiel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mikrosystem</td>
+                        <td class="dropzone" id="drop20"></td>
+                    </tr>
+                    <tr>
+                        <td>Mesosystem</td>
+                        <td class="dropzone" id="drop21"></td>
+                    </tr>
+                    <tr>
+                        <td>Exosystem</td>
+                        <td class="dropzone" id="drop22"></td>
+                    </tr>
+                    <tr>
+                        <td>Makrosystem</td>
+                        <td class="dropzone" id="drop23"></td>
+                    </tr>
+                    <tr>
+                        <td>Chronosystem</td>
+                        <td class="dropzone" id="drop24"></td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <div class="drag-container">
+                <div class="word" draggable="true" id="drag20">Kulturelle Werte und Normen</div>
+                <div class="word" draggable="true" id="drag21">Digitalisierung</div>
+                <div class="word" draggable="true" id="drag22">Eltern-Lehrkraft-Gespräche</div>
+                <div class="word" draggable="true" id="drag23">Familie und Freunde</div>
+                <div class="word" draggable="true" id="drag24">Arbeitsbedingungen der Eltern</div>
+            </div>
+            <button onclick="checkTable()">Prüfen</button>
+            <div id="table-result"></div>
         </section>
-        <button id="check-button">Prüfen</button>
-        <div id="result-message"></div>
-        <div id="domino-result"></div>
-    </main>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const pieces = document.querySelectorAll(".draggable");
-            const slots = document.querySelectorAll(".puzzle-slot");
-            const button = document.getElementById("check-button");
-            const resultMessage = document.getElementById("result-message");
-            const dominoResult = document.getElementById("domino-result");
+function checkTable() {
+    const answers = {
+        drop20: "Familie und Freunde",
+        drop21: "Eltern-Lehrkraft-Gespräche",
+        drop22: "Arbeitsbedingungen der Eltern",
+        drop23: "Kulturelle Werte und Normen",
+        drop24: "Digitalisierung"
+    };
 
-            let draggedPiece = null;
+    let correct = 0;
+    const totalQuestions = Object.keys(answers).length;
 
-            pieces.forEach(piece => {
-                piece.addEventListener("dragstart", (e) => {
-                    draggedPiece = piece;
-                });
+    Object.keys(answers).forEach((dropzoneId) => {
+        const dropzone = document.getElementById(dropzoneId);
+        const word = dropzone.getAttribute("data-word");
+        if (word === answers[dropzoneId]) {
+            correct++;
+        }
+    });
 
-                piece.addEventListener("dragend", () => {
-                    draggedPiece = null;
-                });
-            });
+    const result = document.getElementById("table-result");
+    result.textContent = `Du hast ${correct} von ${totalQuestions} richtig beantwortet.`;
+    result.style.color = correct === totalQuestions ? "green" : "red";
+}
+function checkSystems() {
+    const answers = {
+        drop20: "Familie und Freunde",
+        drop21: "Eltern-Lehrkraft-Gespräche",
+        drop22: "Arbeitsbedingungen der Eltern",
+        drop23: "Kulturelle Werte und Normen",
+        drop24: "Digitalisierung"
+    };
 
-            slots.forEach(slot => {
-                slot.addEventListener("dragover", e => {
-                    e.preventDefault();
-                });
+    let correct = 0;
+    const totalQuestions = Object.keys(answers).length;
 
-                slot.addEventListener("drop", (e) => {
-                    e.preventDefault();
-                    // Erlaubt das Ablegen von Begriff oder Definition
-                    if (draggedPiece) {
-                        // Wenn der Slot leer oder der Slot-Match dem Piece-Match entspricht
-                        if (!slot.hasChildNodes() || 
-                            (slot.firstChild.dataset.match === draggedPiece.dataset.match)) {
-                            
-                            // Wenn das Piece bereits woanders angebracht war, entferne es dort
-                            const currentParent = draggedPiece.parentElement;
-                            if (currentParent !== slot) {
-                                if (currentParent.classList.contains('puzzle-slot')) {
-                                    currentParent.innerHTML = '';
-                                }
-                                slot.innerHTML = '';
-                                slot.appendChild(draggedPiece);
-                            }
-                        }
-                    }
-                });
-            });
+    Object.keys(answers).forEach((dropzoneId) => {
+        const dropzone = document.getElementById(dropzoneId);
+        const word = dropzone.getAttribute("data-word"); // Überprüft das Attribut
+        if (word === answers[dropzoneId]) {
+            correct++;
+        }
+    });
 
-            button.addEventListener("click", () => {
-                let correct = 0;
-                let dominoHTML = '';
+    const result = document.getElementById("table-result");
+    result.textContent = `Du hast ${correct} von ${totalQuestions} richtig beantwortet.`;
+    result.style.color = correct === totalQuestions ? "green" : "red";
+}
 
-                slots.forEach(slot => {
-                    const piece = slot.firstChild;
-                    if (piece && piece.dataset.match === slot.dataset.match) {
-                        correct++;
-                        piece.classList.add('matched');
-                        slot.classList.add('matched');
-                        
-                        // Erstelle Dominosteine für korrekte Zuordnungen
-                        dominoHTML += `
-                            <div class="domino-piece">
-                                <div class="concept">${piece.textContent}</div>
-                                <div class="definition">${slot.textContent}</div>
-                            </div>
-                        `;
-                    }
-                });
+// Drag-and-Drop-Funktionalität
+const words = document.querySelectorAll('.word');
+const dropzones = document.querySelectorAll('.dropzone');
 
-                if (correct === slots.length) {
-                    resultMessage.textContent = "Herzlichen Glückwunsch! Alles korrekt!";
-                    resultMessage.style.color = "green";
-                } else {
-                    resultMessage.textContent = `Du hast ${correct} von ${slots.length} korrekt! Versuch es nochmal.`;
-                    resultMessage.style.color = "red";
-                }
+words.forEach(word => {
+    word.addEventListener('dragstart', dragStart);
+    word.addEventListener('dragend', dragEnd);
+});
 
-                // Zeige Dominosteine
-                dominoResult.innerHTML = dominoHTML;
-            });
-        });
-    </script>
+dropzones.forEach(dropzone => {
+    dropzone.addEventListener('dragover', dragOver);
+    dropzone.addEventListener('dragenter', dragEnter);
+    dropzone.addEventListener('dragleave', dragLeave);
+    dropzone.addEventListener('drop', drop);
+});
+
+function dragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    setTimeout(() => e.target.classList.add('dragging'), 0);
+}
+
+function dragEnd(e) {
+    e.target.classList.remove('dragging');
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragEnter(e) {
+    e.preventDefault();
+    e.target.classList.add('hovered');
+}
+
+function dragLeave(e) {
+    e.target.classList.remove('hovered');
+}
+
+function drop(e) {
+    e.preventDefault();
+    const wordId = e.dataTransfer.getData('text/plain');
+    const wordElement = document.getElementById(wordId);
+
+    if (!e.target.hasChildNodes()) {
+        e.target.appendChild(wordElement);
+        e.target.setAttribute("data-word", wordElement.textContent);
+    }
+
+    e.target.classList.remove('hovered');
+}
+
+</script>
 </body>
 </html>
